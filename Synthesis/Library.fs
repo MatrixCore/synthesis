@@ -1,32 +1,54 @@
 ﻿module Synthesis
 
-let abelar _ =
-    failwith "Not implemented"
+let abelar a =
+    a > 12 && a < 3097 && a % 12 = 0
 
-let area _ _ =
-    failwith "Not implemented"
+let area b h = 
+    match b >= 0.0 && h >= 0.0 with
+        |true -> (0.5 * b) * h
+        |false -> failwith "Invalid dimension"
 
-let zollo _ =
-    failwith "Not implemented"
+let zollo n =
+    match n < 0 with
+        |true -> -1 * n
+        |false -> n * 2
 
-let min _ _ =
-    failwith "Not implemented"
+let min num1 num2 =
+    match num1 > num2 with
+        |true -> num2
+        |false -> num1
 
-let max _ _ =
-    failwith "Not implemented"
+let max num1 num2 =
+    match num1 < num2 with
+        |true -> num2
+        |false -> num1
 
-let ofTime _ _ _ =
-    failwith "Not implemented"
+let ofTime h m s =
+    (h * 3600) + (m * 60) + (s)
 
-let toTime _ =
-    failwith "Not implemented"
+let toTime time =
+// Remeber to deal with negatives
+    match time <= 0 with
+    |true -> 0,0,0
+    |false ->   let h = time / 3600
+                let m = (time - (h * 3600)) / 60
+                let s = (time - (h * 3600) - (m * 60))
+                h,m,s
+    
 
-let digits _ =
-    failwith "Not implemented"
+let digits number =
+    let rec FindDigit num digits = 
+        match num = 0 && digits <> 0 with
+        | true -> digits // base case
+        | false -> FindDigit (num/10) (digits + 1) //recursive case        
+    FindDigit number 0
+    
 
-let minmax _ =
-    failwith "Not implemented"
-
+let minmax (a,b,c,d) =
+    let numMin = min (min a b) (min c d)
+    let numMax = max (max a b) (max c d)
+    numMin, numMax
+        
 let isLeap _ =
     failwith "Not implemented"
 
@@ -36,10 +58,15 @@ let month _ =
 let toBinary _ =
     failwith "Not implemented"
 
-let bizFuzz _ =
-    failwith "Not implemented"
+let bizFuzz num =
+    //let ThreeDivide n = ()
+  
+    //let FiveDivide n = ()
 
-let monthDay _ _ =
+    //let ThreeFiveDivide n = ()
+    failwith "Not implemtented"
+
+let monthDay _ _ = 
     failwith "Not implemented"
 
 let coord _ =
