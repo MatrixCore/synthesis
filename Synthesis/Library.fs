@@ -27,7 +27,6 @@ let ofTime h m s =
     (h * 3600) + (m * 60) + (s)
 
 let toTime time =
-// Remeber to deal with negatives
     match time <= 0 with
     |true -> 0,0,0
     |false ->   let h = time / 3600
@@ -49,22 +48,45 @@ let minmax (a,b,c,d) =
     let numMax = max (max a b) (max c d)
     numMin, numMax
         
-let isLeap _ =
-    failwith "Not implemented"
+let isLeap year =
+    match year < 1582 with
+    |true -> failwith "What the fuck?"
+    |false -> match year % 4 = 0 && (not(year % 100 = 0) || year % 400 = 0) with
+              |true -> true
+              |false -> false
+    
+    
 
-let month _ =
-    failwith "Not implemented"
+let month which = 
+    match which with | 1 -> "January", 31
+                     | 2 -> "February", 28
+                     | 3 -> "March", 31
+                     | 4 -> "April", 30
+                     | 5 -> "May", 31
+                     | 6 -> "June", 30
+                     | 7 -> "July", 31
+                     | 8 -> "August", 31
+                     | 9 -> "September", 30
+                     | 10 -> "October", 31
+                     | 11 -> "November", 30
+                     | 12 -> "December", 31
+                     | _ -> failwith "Invalid month"
 
-let toBinary _ =
-    failwith "Not implemented"
+
+let toBinary num =
+    failwith "Fuck off" 
 
 let bizFuzz num =
-    //let ThreeDivide n = ()
-  
-    //let FiveDivide n = ()
-
-    //let ThreeFiveDivide n = ()
-    failwith "Not implemtented"
+    let rec FB count a b c = match count > num with
+        |true -> a,b,c //base case
+        |false -> match count % 15 with 
+            |0 -> FB (count + 1) (a + 1) (b + 1) (c + 1)
+            |_ -> match count % 5 with 
+                |0 -> FB (count + 1) a (b + 1) c
+                |_ -> match count % 3 with 
+                    |0 -> FB (count + 1) (a + 1) b c
+                    |_ -> FB (count + 1) a b c
+    FB 1 0 0 0
 
 let monthDay _ _ = 
     failwith "Not implemented"
