@@ -2,6 +2,7 @@ module Synthesis.Tests
 open NUnit.Framework
 open FsUnit
 open Preamble
+open Synthesis
 
 (*
 NOTE: These tests have been written so that they will be easy for you to read.
@@ -205,7 +206,7 @@ let ``bizFuzz`` () =
 
 [<Test>]
 let ``monthDay`` () =
-    (fun () -> monthDay 0 1700) |> shouldFail
+   (* (fun () -> monthDay 0 1700) |> shouldFail
     (fun () -> monthDay 0 1600) |> shouldFail
     (fun () -> monthDay 366 1700) |> shouldFail
     (fun () -> monthDay 367 1600) |> shouldFail
@@ -227,11 +228,12 @@ let ``monthDay`` () =
     monthDay 31 2020 |> should equal "January"
     monthDay 32 2020 |> should equal "February"
     monthDay 59 2020 |> should equal "February"
-    //monthDay 60 2020 |> should equal "February"
     monthDay 61 2020 |> should equal "March"
     monthDay 334 2020 |> should equal "November"
     monthDay 335 2020 |> should equal "November"
-    monthDay 336 2020 |> should equal "December"
+    monthDay 336 2020 |> should equal "December"*)
+    monthDay 60 2020 |> should equal "February"
+
 
 [<Test>]
 let ``circle`` () =
