@@ -74,7 +74,9 @@ let month which =
 
 
 let toBinary num =
-    failwith "Fuck off" 
+    match num >= 0 with
+    |false -> failwith "Negative int"
+    |true -> 
 
 let bizFuzz num =
     let rec FB count a b c = match count > num with
