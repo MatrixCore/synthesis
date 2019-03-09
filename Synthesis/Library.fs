@@ -50,7 +50,7 @@ let minmax (a,b,c,d) =
         
 let isLeap year =
     match year < 1582 with
-    |true -> failwith "What the fuck?"
+    |true -> failwith "Year less than 1582"
     |false -> match year % 4 = 0 && (not(year % 100 = 0) || year % 400 = 0) with
               |true -> true
               |false -> false
@@ -74,24 +74,47 @@ let month which =
 
 
 let toBinary num =
-    match num >= 0 with
-    |false -> failwith "Negative int"
-    |true -> 
+    match num < 0 with
+    |true -> failwith "Negative int"
+    |false -> 
+    let rec BinaryConvert remain binary = 
+        match remain > 0 || binary = "" with
+        | false -> binary
+        | true -> BinaryConvert (remain/2) (string(remain%2) + binary)
+    BinaryConvert num ""
 
 let bizFuzz num =
     let rec FB count a b c = match count > num with
-        |true -> a,b,c //base case
-        |false -> match count % 15 with 
+        |true -> a, b, c //base case
+        |false -> match count % 15 with
             |0 -> FB (count + 1) (a + 1) (b + 1) (c + 1)
-            |_ -> match count % 5 with 
+            |_ -> match count % 5 with
                 |0 -> FB (count + 1) a (b + 1) c
-                |_ -> match count % 3 with 
+                |_ -> match count % 3 with
                     |0 -> FB (count + 1) (a + 1) b c
                     |_ -> FB (count + 1) a b c
     FB 1 0 0 0
 
-let monthDay _ _ = 
-    failwith "Not implemented"
+let monthDay d y = 
+    let rec FindMonth days count leap = 
+        let a,b = month count
+        match days > b with
+           | false -> a
+           | true -> match leap = 1 && count = 2 with 
+                     | true -> FindMonth (days-b-leap) (count+1) leap
+                     | false -> FindMonth (days-b) (count+1) leap
 
-let coord _ =
+    match isLeap y with
+    | true -> 
+        match d >= 1 && d <= 366 with
+        | false -> failwith "Invalid day"
+        | true -> FindMonth d 1 1
+    | false -> 
+        match d >= 1 && d <= 365 with
+        | false -> failwith "Invalid day"
+        | true -> FindMonth d 1 0
+        
+
+let coord x =
+    
     failwith "Not implemented"
