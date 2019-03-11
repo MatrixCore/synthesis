@@ -206,7 +206,7 @@ let ``bizFuzz`` () =
 
 [<Test>]
 let ``monthDay`` () =
-   (* (fun () -> monthDay 0 1700) |> shouldFail
+    (fun () -> monthDay 0 1700) |> shouldFail
     (fun () -> monthDay 0 1600) |> shouldFail
     (fun () -> monthDay 366 1700) |> shouldFail
     (fun () -> monthDay 367 1600) |> shouldFail
@@ -231,17 +231,18 @@ let ``monthDay`` () =
     monthDay 61 2020 |> should equal "March"
     monthDay 334 2020 |> should equal "November"
     monthDay 335 2020 |> should equal "November"
-    monthDay 336 2020 |> should equal "December"*)
+    monthDay 336 2020 |> should equal "December"
     monthDay 60 2020 |> should equal "February"
 
 
 [<Test>]
-let ``circle`` () = ()
-    (*let dist = coord >> (fun (x,_) -> x)
+let ``circle`` () =
+    let dist = coord >> (fun (x,_) -> x)
+    //let dist x = coord x |> (fun (x,_) -> x)
     let within = coord >> (fun (_,x) -> x)
     dist (3.0, 2.5) (1.5, 9.4) |> should (equalWithin 0.001) 7.061
     dist (0.0, 0.0) (3.0, 4.0) |> should equal 5.0
     dist (0.0, 0.0) (-3.0, -4.0) |> should equal 5.0
     within (2.0, 1.8) (1.0, 2.5) 1.3 2.0 |> should equal true
     within (-3.1, -3.4) (-3.9, -2.5) 3.0 2.0 |> should equal true
-    within (-4.8, -3.4) (-3.9, -2.5) 3.0 2.0 |> should equal false*)
+    within (-4.8, -3.4) (-3.9, -2.5) 3.0 2.0 |> should equal false

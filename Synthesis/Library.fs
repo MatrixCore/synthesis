@@ -100,7 +100,7 @@ let monthDay d y =
         let a,b = month count
         match days > b with
            | false -> a
-           | true -> match leap = 1 && count = 2 with 
+           | true -> match leap = 1 && count = 1 with 
                      | true -> FindMonth (days-b-leap) (count+1) leap
                      | false -> FindMonth (days-b) (count+1) leap
 
@@ -115,7 +115,7 @@ let monthDay d y =
         | true -> FindMonth d 1 0
         
 
-let coord coord1 coord2 =
+let coord coord1 =
     let sqrt n =
         let rec calculate guess i =
             match i with
@@ -130,8 +130,9 @@ let coord coord1 coord2 =
     //End of Square Root Function
     let dist () =
         let x1, y1 = coord1
-        let x2, y2 = coord2
+        let x2, y2 = coord1
         sqrt ((x1-x2)*(x1-x2)) + ((y1-y2)*(y1-y2))
+
     
     let within () =
         
