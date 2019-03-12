@@ -115,7 +115,7 @@ let monthDay d y =
         | true -> FindMonth d 1 false
         
 
-let coord coord1 =
+let coord coord1 coord2 =
     let sqrt n =
         let rec calculate guess i =
             match i with
@@ -128,5 +128,13 @@ let coord coord1 =
         | true -> failwith "Impossibru!"
         | _ -> calculate (n/2.0) 0
     //End of Square Root Function
+    let dist =
+        let x1,y1 = coord1
+        let x2,y2 = coord2
+        sqrt(((x1 -x2)*(x1 -x2))+((y1 -y2)*(y1 -y2)))
+
+    let within =
+        
     
-    failwith "Not implemented"
+    failwith "I am confusion"
+    
