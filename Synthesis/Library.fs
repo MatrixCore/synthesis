@@ -100,19 +100,19 @@ let monthDay d y =
         let a,b = month count
         match days > b with
            | false -> a
-           | true -> match leap = 1 && count = 1 with 
-                     | true -> FindMonth (days-b-leap) (count+1) leap
+           | true -> match leap && count = 1 with 
+                     | true -> FindMonth (days-b-1) (count+1) leap
                      | false -> FindMonth (days-b) (count+1) leap
 
     match isLeap y with
     | true -> 
         match d >= 1 && d <= 366 with
         | false -> failwith "Invalid day"
-        | true -> FindMonth d 1 1
+        | true -> FindMonth d 1 true
     | false -> 
         match d >= 1 && d <= 365 with
         | false -> failwith "Invalid day"
-        | true -> FindMonth d 1 0
+        | true -> FindMonth d 1 false
         
 
 let coord coord1 =
@@ -128,15 +128,5 @@ let coord coord1 =
         | true -> failwith "Impossibru!"
         | _ -> calculate (n/2.0) 0
     //End of Square Root Function
-    let dist () =
-        let x1, y1 = coord1
-        let x2, y2 = coord1
-        sqrt ((x1-x2)*(x1-x2)) + ((y1-y2)*(y1-y2))
-
     
-    let within () =
-        
-        failwith "Not implemented"
-
-
     failwith "Not implemented"
