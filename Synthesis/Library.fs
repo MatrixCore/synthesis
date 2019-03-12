@@ -29,17 +29,18 @@ let ofTime h m s =
 let toTime time =
     match time <= 0 with
     |true -> 0,0,0
-    |false ->   let h = time / 3600
-                let m = (time - (h * 3600)) / 60
-                let s = (time - (h * 3600) - (m * 60))
-                h,m,s
-    
+    |false ->   
+        let h = time / 3600
+        let m = (time - (h * 3600)) / 60
+        let s = (time - (h * 3600) - (m * 60))
+        (h,m,s)
 
 let digits number =
     let rec FindDigit num digits = 
         match num = 0 && digits <> 0 with
         | true -> digits // base case
-        | false -> FindDigit (num/10) (digits + 1) //recursive case        
+        | false -> 
+            FindDigit (num/10) (digits + 1) //recursive case        
     FindDigit number 0
     
 
@@ -51,9 +52,10 @@ let minmax (a,b,c,d) =
 let isLeap year =
     match year < 1582 with
     |true -> failwith "Year less than 1582"
-    |false -> match year % 4 = 0 && (not(year % 100 = 0) || year % 400 = 0) with
-              |true -> true
-              |false -> false
+    |false -> 
+        match year % 4 = 0 && (not(year % 100 = 0) || year % 400 = 0) with
+        |true -> true
+        |false -> false
     
     
 
@@ -80,7 +82,8 @@ let toBinary num =
     let rec BinaryConvert remain binary = 
         match remain > 0 || binary = "" with
         | false -> binary
-        | true -> BinaryConvert (remain/2) (string(remain%2) + binary)
+        | true -> 
+            BinaryConvert (remain/2) (string(remain%2) + binary)
     BinaryConvert num ""
 
 let bizFuzz num =
@@ -133,8 +136,7 @@ let coord coord1 coord2 =
         let x2,y2 = coord2
         sqrt(((x1 -x2)*(x1 -x2))+((y1 -y2)*(y1 -y2)))
 
-    let within =
+    let within = ()
         
-    
     failwith "I am confusion"
     
